@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react"
 import bg_image from './assets/bg_image.jpeg'
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
-import emailjs from '@emailjs/browser';
+// import emailjs from '@emailjs/browser';
 
 interface Booking {
   created_at: string;
@@ -15,9 +15,9 @@ interface Booking {
   status: string;
 }
 
-const SERVICE_ID = 'service_f3ytnp6';
-const TEMPLATE_ID = 'template_zbx4fme';
-const PUBLIC_KEY = 'Zg7ZI3Udlsr0ade51';
+// const SERVICE_ID = 'service_f3ytnp6';
+// const TEMPLATE_ID = 'template_zbx4fme';
+// const PUBLIC_KEY = 'Zg7ZI3Udlsr0ade51';
 
 function App() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -35,13 +35,6 @@ function App() {
 
     if (data) {
       console.log(data)
-      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.value, PUBLIC_KEY)
-      .then((result) => {
-        result.text == 'OK' ? loading.value = false : console.log('FAILED...', result.text);
-        console.log('SUCCESS!', result.text);
-      }, (error) => {
-        console.log('FAILED...', error.text);
-      });
       await fetchBookings();
       setLoading(false)
     } else {
@@ -66,7 +59,7 @@ function App() {
 
   useEffect(() => {
     fetchBookings();
-    console.log(emailjs)
+    // console.log(emailjs)
   }, [])
 
   return (
