@@ -56,11 +56,11 @@ const AccountDetails = () => {
                 </div>
               </div>
             </div>}
-          <div className="mt-4">
+          <div className="mt-8">
             {showAccountDetails && <Link to={`/booking-status/${userId}`}
               className="w-full bg-[#1b011c] text-white py-2 px-4 rounded-md transition-colors duration-200 font-medium"
             >
-              Check Status
+              Confirm payment
             </Link>}
           </div>
         </div>

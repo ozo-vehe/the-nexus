@@ -22,11 +22,53 @@ const BookSeat = () => {
     });
   };
 
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@(gmail\.com|[^\s@]+\.[^\s@]+)$/;
+    const isGmail = email.toLowerCase().includes('@gmail.com');
+    if (!isGmail && !email.toLowerCase().includes('@gmail.com')) return false;
+    return emailRegex.test(email);
+  };
+
+  const isValidPhone = (phone: string): boolean => {
+    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const isUserExist = async (email: string): Promise<boolean> => {
+    const { data: bookings } = await supabase
+      .from('bookings')
+      .select("*")
+      .eq('email', email);
+
+    console.log(bookings);
+    if (bookings && bookings.length > 0) {
+      return true;
+    }
+    return false;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const id: string = v4()
+    const id: string = v4().split('-')[0];
+    console.log(id);
     formData.id = id;
+    if (!isValidEmail(formData.email)) {
+      alert('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+    if (!isValidPhone(formData.phone)) {
+      alert('Please enter a valid phone number.');
+      setLoading(false);
+      return;
+    }
+    if (await isUserExist(formData.email)) {
+      alert('This email address has already been used, please use another email address.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const { data, error } = await supabase
         .from('bookings')
@@ -35,7 +77,7 @@ const BookSeat = () => {
 
       console.log(data);
       console.log(error);
-      if(data) {
+      if (data) {
         localStorage.setItem('the_nexus_id', id);
         console.log(formData)
         setLoading(false);
@@ -75,7 +117,7 @@ const BookSeat = () => {
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email Address
+                Email Address (Gmail Only)
               </label>
               <input
                 type="email"
@@ -110,9 +152,9 @@ const BookSeat = () => {
             >
               {loading ? (
                 <span className='block animate-spin w-4 h-4 rounded-full border-x border-gray-50'></span>)
-              :(
-                "Book seat"
-              )}
+                : (
+                  "Book seat"
+                )}
             </button>
           </form>
         </div>

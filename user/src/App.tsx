@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <main className='lg:px-10 md:px-5 px-4 py-8 max-w-[1440px] mx-auto'>
-        <header className='border lg:h-[80vh] md:h-[70vh] h-[50vh] max-w-[1440px] mx-auto rounded-[36px] overflow-hidden'>
+        <header className='lg:h-[80vh] md:h-[70vh] h-[50vh] max-w-[1440px] mx-auto rounded-[36px] overflow-hidden'>
           {/* <img className='w-full h-full object-cover' src={bg_image} alt="The Nexus background image" /> */}
           <video className="w-full h-full object-cover" playsInline autoPlay muted>
             <source src={nexus_video} type="video/mp4" />
@@ -42,9 +42,9 @@ function App() {
         </div>
 
         <div className="event_button flex flex-wrap gap-4">
-          <Link to="/register" aria-labelled="Book seat button" className=' bg-[#1b011c]/90 text-gray-100 px-5 py-2 rounded-[8px] outline-none border-none font-bold hover:bg-[#1b011c] transition-all duration-300 cursor-pointer' >Book a seat</Link>
+          <Link to="/register" aria-label="Book seat button" className=' bg-[#1b011c]/90 text-gray-100 px-5 py-2 rounded-[8px] outline-none border-none font-bold hover:bg-[#1b011c] transition-all duration-300 cursor-pointer' >Book a seat</Link>
 
-          <Link to="/booking-email" aria-labelled="Book seat button" className=' bg-gray-50 border border-[#1b011c] text-[#1b011c] px-5 py-2 rounded-[8px] outline-none font-bold cursor-pointer' >See booking status</Link>
+          <Link to="/booking-email" aria-label="Book seat button" className=' bg-gray-50 border border-[#1b011c] text-[#1b011c] px-5 py-2 rounded-[8px] outline-none font-bold cursor-pointer' >See booking status</Link>
         </div>
       </main>
       <Analytics />

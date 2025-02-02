@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react"
 import bg_image from './assets/bg_image.jpeg'
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
+import emailjs from '@emailjs/browser';
 
 interface Booking {
   created_at: string;
@@ -14,8 +15,12 @@ interface Booking {
   status: string;
 }
 
+const SERVICE_ID = 'service_f3ytnp6';
+const TEMPLATE_ID = 'template_zbx4fme';
+const PUBLIC_KEY = 'Zg7ZI3Udlsr0ade51';
+
 function App() {
-  const [bookings, setBookingss] = useState<Booking[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleConfirmPayment = async (id: string) => {
@@ -30,6 +35,13 @@ function App() {
 
     if (data) {
       console.log(data)
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.value, PUBLIC_KEY)
+      .then((result) => {
+        result.text == 'OK' ? loading.value = false : console.log('FAILED...', result.text);
+        console.log('SUCCESS!', result.text);
+      }, (error) => {
+        console.log('FAILED...', error.text);
+      });
       await fetchBookings();
       setLoading(false)
     } else {
@@ -45,7 +57,7 @@ function App() {
       .select('*')
     if (data) {
       console.log(data)
-      setBookingss(data)
+      setBookings(data)
       console.log(error)
     } else {
       console.log(error)
@@ -54,6 +66,7 @@ function App() {
 
   useEffect(() => {
     fetchBookings();
+    console.log(emailjs)
   }, [])
 
   return (
@@ -61,9 +74,6 @@ function App() {
       <main className='lg:px-10 md:px-5 px-4 py-8 max-w-full mx-auto'>
         <header className='border lg:h-[30vh] md:h-[30vh] h-[20vh] max-w-full mx-auto rounded-[36px] overflow-hidden'>
           <img className='w-full h-full object-cover' src={bg_image} alt="The Nexus background image" />
-          {/* <video className="w-full h-full object-cover" playsInline autoPlay muted>
-            <source src={nexus_video} type="video/mp4" />
-          </video> */}
         </header>
 
 

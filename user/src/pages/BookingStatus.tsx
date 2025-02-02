@@ -49,27 +49,27 @@ const BookingStatus = () => {
             <div className="p-6">
               <div className="mb-6">
                 {booking.status === "confirmed" ? (
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div className="ml-4">
-                    <h2 className="text-lg font-semibold text-gray-800">Booking Confirmed</h2>
-                    <p className="text-gray-600">Your booking has been successfully confirmed</p>
-                  </div>
-                </div>
-                ): (
                   <div className="flex items-center">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <img width="26" height="26" src="https://img.icons8.com/metro/ffffff/26/clock--v1.png" alt="clock--v1"/>
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="ml-4">
+                      <h2 className="text-lg font-semibold text-gray-800">Booking Confirmed</h2>
+                      <p className="text-gray-600">Your booking has been successfully confirmed</p>
+                    </div>
                   </div>
-                  <div className="ml-4">
-                    <h2 className="text-lg font-semibold text-gray-800">Booking Confirmed</h2>
-                    <p className="text-gray-600">Your booking has been successfully confirmed</p>
+                ) : (
+                  <div className="flex items-start gap-4">
+                    <div className="lg:w-12 md:w-12 w-14 h-12 p-2 bg-yellow-500 rounded-full flex items-center justify-center">
+                      <img className="w-full h-full object-cover" src="https://img.icons8.com/metro/ffffff/26/clock--v1.png" alt="clock--v1" />
+                    </div>
+                    <div className="w-fit">
+                      <h2 className="text-lg font-semibold text-gray-800">Confirmation pending</h2>
+                      <p className="text-gray-600">Your booking status will be updated once payment is confirmed</p>
+                    </div>
                   </div>
-                </div>
                 )}
               </div>
 
@@ -91,7 +91,7 @@ const BookingStatus = () => {
                     <h3 className="text-sm font-medium text-gray-500">Status</h3>
                     {booking.status === "confirmed" ? (
                       <p className="mt-1 text-lg font-semibold text-green-600">Confirmed</p>
-                    ):(
+                    ) : (
                       <p className="mt-1 text-lg font-semibold text-yellow-600">Pending</p>
                     )}
                   </div>

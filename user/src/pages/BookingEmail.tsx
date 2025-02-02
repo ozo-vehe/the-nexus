@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { supabase } from '../supabase'
 
 const BookingEmail = () => {
@@ -15,13 +15,14 @@ const BookingEmail = () => {
       .from('bookings')
       .select("*")
       .eq('email', email);
-    if (bookings) {
+    if (bookings && bookings.length > 0) {
       console.log(bookings[0].id);
       navigate(`/booking-status/${bookings[0].id}`)
       setLoading(false)
     }
     else {
       console.log(`${error}`);
+      alert('No booking found for this email address.');
       setLoading(false);
     }
   }
@@ -59,6 +60,11 @@ const BookingEmail = () => {
                 "Check status"
               )}
           </button>
+          <Link to="/"
+            className="w-full cursor-pointer flex justify-center items-center h-[40px] px-4 border rounded-md shadow-sm font-medium text-[#1b011c] bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b011c]"
+          >
+            Go back
+          </Link>
         </form>
       </div>
     </div>
