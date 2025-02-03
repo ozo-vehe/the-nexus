@@ -31,21 +31,21 @@ const AccountDetails = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700">Bank Name</label>
                 <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                  <p className="text-gray-900">First Bank of Nigeria</p>
+                  <p className="text-gray-900">Palmpay</p>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">Account Name</label>
                 <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                  <p className="text-gray-900">John Doe</p>
+                  <p className="text-gray-900">Aliyu Qassim</p>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">Account Number</label>
                 <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                  <p className="text-gray-900">1234567890</p>
+                  <p className="text-gray-900">8063980134</p>
                 </div>
               </div>
 
