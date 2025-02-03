@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { v4 } from 'uuid';
 import { supabase } from '../supabase';
 
@@ -12,6 +12,7 @@ const BookSeat = () => {
     status: 'pending',
   });
   const [loading, setLoading] = useState(false);
+  const [continueButton, setContinueButton] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,7 +35,7 @@ const BookSeat = () => {
     return phoneRegex.test(phone);
   };
 
-  const isUserExist = async (email: string): Promise<boolean> => {
+  const isUserExist = async (email: string): Promise<string> => {
     const { data: bookings } = await supabase
       .from('bookings')
       .select("*")
@@ -42,9 +43,13 @@ const BookSeat = () => {
 
     console.log(bookings);
     if (bookings && bookings.length > 0) {
-      return true;
+      if (bookings[0].status === 'pending') {
+        return "pending";
+      } else {
+        return "exist";
+      }
     }
-    return false;
+    return "not exist";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,9 +68,18 @@ const BookSeat = () => {
       setLoading(false);
       return;
     }
-    if (await isUserExist(formData.email)) {
+
+    const user_status = await isUserExist(formData.email);
+
+    if (user_status === "exist") {
       alert('This email address has already been used, please use another email address.');
       setLoading(false);
+      return;
+    }
+    if (user_status === "pending") {
+      alert("This email address has a pending payment, please continue to the payment page.");
+      setLoading(false);
+      setContinueButton(true);
       return;
     }
 
@@ -75,10 +89,8 @@ const BookSeat = () => {
         .insert([formData])
         .select()
 
-      console.log(data);
-      console.log(error);
       if (data) {
-        localStorage.setItem('the_nexus_id', id);
+        localStorage.setItem('the_nexus_user', JSON.stringify(formData));
         console.log(formData)
         setLoading(false);
         navigate('/account-details');
@@ -156,6 +168,11 @@ const BookSeat = () => {
                   "Book seat"
                 )}
             </button>
+            {continueButton && <Link to="/account-details"
+              className="w-full cursor-pointer flex justify-center items-center h-[40px] px-4 border rounded-md shadow-sm font-medium bg-gray-50 border-[#1b011c] text-[#1b011c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b011c]"
+            >
+              Continue to payment page
+            </Link>}
           </form>
         </div>
       </div>

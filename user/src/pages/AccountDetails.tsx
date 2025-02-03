@@ -6,7 +6,8 @@ const AccountDetails = () => {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    const id: string = localStorage.getItem('the_nexus_id') as string;
+    const user: string = localStorage.getItem('the_nexus_user') as string;
+    const { id } = JSON.parse(user);
     if (!id) {
       window.location.href = '/register';
     }
@@ -17,7 +18,7 @@ const AccountDetails = () => {
     <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <div className="px-6 py-8">
-          <header className="mb-8 flex flex-col items-center justify-center">
+          <header className="mb-4 flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold text-gray-900 text-center mb-1">Account Details</h2>
             <p className="text-red-500 mb-3 text-center font-bold">
               Please verify all details before making any transfer. Use the unique ID generated as the "remark" of the transfer.
@@ -28,6 +29,7 @@ const AccountDetails = () => {
 
           {showAccountDetails &&
             <div className="space-y-6">
+              <h2 className="text-[18px]">Ticket Price: <span className="font-bold text-3xl text-[#1b011c]">N5,000</span></h2>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Bank Name</label>
                 <div className="mt-1 p-3 bg-gray-50 rounded-md">
