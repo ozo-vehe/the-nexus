@@ -43,6 +43,7 @@ const BookSeat = () => {
 
     console.log(bookings);
     if (bookings && bookings.length > 0) {
+      localStorage.setItem('the_nexus_user', JSON.stringify(bookings[0]));
       if (bookings[0].status === 'pending') {
         return "pending";
       } else {
