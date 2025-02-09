@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import AccountDetails from './pages/AccountDetails.tsx';
 import BookingStatus from './pages/BookingStatus.tsx';
 import BookingEmail from './pages/BookingEmail.tsx';
+import UserCard from './pages/UserCard.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/account-details" element={<AccountDetails />} />
         <Route path='/booking-email' element={<BookingEmail />} />
         <Route path='/booking-status/:id' element={<BookingStatus />} />
+        <Route path='/user/:id' element={<UserCard />} />
       </Routes>
     </StrictMode>
   </BrowserRouter>
