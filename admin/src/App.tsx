@@ -21,13 +21,13 @@ interface Booking {
 
 function App() {
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingId, setLoadingId] = useState("");
   const [bookingsLoading, setBookingsLoading] = useState(false);
 
   const handleConfirmPayment = async (id: string) => {
     console.log(id)
 
-    setLoading(true)
+    setLoadingId(id)
     const { data, error } = await supabase
       .from('bookings')
       .update({ status: 'confirmed' })
@@ -54,10 +54,10 @@ function App() {
       console.log('QR code uploaded successfully!' + uploadData);
 
       await fetchBookings();
-      setLoading(false)
+      setLoadingId("")
     } else {
       console.log(error)
-      setLoading(false)
+      setLoadingId("")
     }
 
   }
@@ -69,7 +69,12 @@ function App() {
       .select('*')
     if (data) {
       console.log(data)
-      setBookings(data)
+      const sortedData = data.sort((a, b) => {
+        if (a.status === "confirmed" && b.status !== "confirmed") return 1
+        if (a.status !== "confirmed" && b.status === "confirmed") return -1
+        return 0
+      })
+      setBookings(sortedData)
 
       setBookingsLoading(false)
     } else {
@@ -128,11 +133,15 @@ function App() {
                       </td>
                       {booking.status === "pending" &&
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center justify-end">
-                          {!loading ? (
-                            <button aria-label='confirm a booking' className='rounded-full p-1 w-7 h-7 bg-green-100 cursor-pointer' onClick={() => handleConfirmPayment(booking.id)}><img className="w-full h-full object-cover" src="https://img.icons8.com/ios-glyphs/016630/30/checkmark--v1.png" alt="checkmark--v1" /></button>
-                          ) : (
-                            <span className='block w-4 h-4 border-x border-gray-700 rounded-full animate-spin'></span>
-                          )}
+                          <button aria-label='confirm a booking' className='cursor-pointer' onClick={() => handleConfirmPayment(booking.id)}>
+
+                            {loadingId === booking.id ? (
+
+                              <span className='block w-4 h-4 border-x border-gray-700 rounded-full animate-spin'></span>
+                            ) : (
+                              <img className="w-7 h-7 bg-green-100 rounded-full p-[6px]" src="https://img.icons8.com/ios-glyphs/016630/30/checkmark--v1.png" alt="checkmark--v1" />
+                            )}
+                          </button>
                         </td>
                       }
                     </tr>
