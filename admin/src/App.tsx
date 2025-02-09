@@ -45,7 +45,7 @@ function App() {
       const { data: uploadData, error: uploadError } = await supabase
         .storage
         .from('qr-codes')
-        .upload(`${data[0].id}.png`, file);
+        .upload(`qr-${data[0].id}.png`, file);
 
       if (uploadError) {
         console.error('Error uploading QR code:', uploadError);
