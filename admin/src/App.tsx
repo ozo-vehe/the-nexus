@@ -37,7 +37,7 @@ function App() {
     if (data) {
       console.log(data)
       const req = await fetch(
-        `http://api.qrserver.com/v1/create-qr-code/?data=https://the-nexus-event.vercel.app/user/${data[0].id}&size=200x200`
+        `https://api.qrserver.com/v1/create-qr-code/?data=https://the-nexus-event.vercel.app/user/${data[0].id}&size=200x200`
       );
       const blob = await req.blob();
       const file = new File([blob], `qrcode-${data[0].id}.png`, { type: 'image/png' });
