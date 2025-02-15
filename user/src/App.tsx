@@ -42,7 +42,7 @@ function App() {
         </div>
 
         <div className="event_button flex flex-wrap gap-4">
-          <Link to="/register" aria-label="Book seat button" className=' bg-[#1b011c]/90 text-gray-100 px-5 py-2 rounded-[8px] outline-none border-none font-bold hover:bg-[#1b011c] transition-all duration-300 cursor-pointer' >Book a seat</Link>
+          {/* <Link to="/register" aria-label="Book seat button" className=' bg-[#1b011c]/90 text-gray-100 px-5 py-2 rounded-[8px] outline-none border-none font-bold hover:bg-[#1b011c] transition-all duration-300 cursor-pointer' >Book a seat</Link> */}
 
           <Link to="/booking-email" aria-label="Book seat button" className=' bg-gray-50 border border-[#1b011c] text-[#1b011c] px-5 py-2 rounded-[8px] outline-none font-bold cursor-pointer' >See booking status</Link>
         </div>

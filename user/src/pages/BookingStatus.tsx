@@ -5,6 +5,7 @@ import { supabase } from "../supabase";
 const BookingStatus = () => {
   const params = useParams();
   const [loading, setLoading] = useState(true);
+  const [showAccountDetails, setShowAccountDetails] = useState(false);
   const [booking, setBooking] = useState({
     id: '',
     phone: '',
@@ -98,11 +99,25 @@ const BookingStatus = () => {
                 </div>
               </div>
 
-              <div className="mt-8">
-                <Link to="/" className="w-full bg-[#1b011c] text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1b011c] focus:ring-offset-2 font-bold">
+              <div className="mt-8 flex items-center gap-4">
+                <Link to="/" className="min-w-[100px] text-center bg-[#1b011c] text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1b011c] focus:ring-offset-2 font-bold">
                   Home
                 </Link>
+                <button type="button" aria-label="Show account details" className="text-center min-w-[100px] bg-[#1b011c] text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1b011c] focus:ring-offset-2 font-bold cursor-pointer" onClick={() => setShowAccountDetails(!showAccountDetails)}>Account Details</button>
               </div>
+
+              {showAccountDetails && 
+              <div className="account_details mt-6">
+                <div className="space-y-4">
+                  <h2 className="text-[18px]">Ticket Price: <span className="font-bold text-3xl text-[#1b011c]">N5,000</span></h2>
+                  <ul className="flex flex-col gap-3 text-xl list-disc px-5">
+                    <li>Bank Name: Palmpay</li>
+                    <li>Account Name: Aliyu Qassim</li>
+                    <li>Account Number: 8063980134</li>
+                    <li>Your unique ID: {id} </li>
+                    </ul>
+                </div>
+              </div>}
             </div>
           )}
 

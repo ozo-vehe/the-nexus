@@ -161,7 +161,7 @@ const BookSeat = () => {
             <button
               aria-label='Book Seat'
               type="submit"
-              className="w-full cursor-pointer flex justify-center items-center h-[40px] px-4 border border-transparent rounded-md shadow-sm font-medium text-white bg-[#1b011c] hover:bg-[#1b011c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b011c]"
+              className="w-full cursor-pointer flex justify-center items-center h-[40px] px-4 border border-transparent rounded-md shadow-sm font-medium text-white bg-[#1b011c] hover:bg-[#1b011c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b011c] mb-2"
             >
               {loading ? (
                 <span className='block animate-spin w-4 h-4 rounded-full border-x border-gray-50'></span>)
@@ -174,6 +174,10 @@ const BookSeat = () => {
             >
               Continue to payment page
             </Link>}
+            <Link to="/"
+              className="w-full cursor-pointer flex justify-center items-center h-[40px] px-4 border rounded-md shadow-sm font-medium bg-white text-[#1b011c] border-[#1b011c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1b011c]"
+            > Go back
+            </Link>
           </form>
         </div>
       </div>
